@@ -14,7 +14,7 @@ import javax.servlet.annotation.WebFilter;
 /**
  * Servlet Filter implementation class AuthFilter
  */
-@WebFilter("/auth")
+@WebFilter(filterName="auth1",urlPatterns="/auth/*")
 public class AuthFilter implements Filter {
 
 
@@ -42,7 +42,7 @@ public class AuthFilter implements Filter {
 		
 		if(!userEmail.equals("") && !password.equals("")) {
 			if(userEmail.equals("admin@gmail.com") && password.equals("admin@123")) {
-				
+				// next chain request
 				chain.doFilter(request, response);
 				
 			} else {
@@ -50,7 +50,8 @@ public class AuthFilter implements Filter {
 			}			
 		} else {
 			out.println("<h1 style='color:red'>Login Failed  * Required filled are missing! </h1>");
-		}	
+		}
+		out.print("</html></body>");
 		
 	}
 
